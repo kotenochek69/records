@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecordsDb</title>
+    <link th:href="@{/styles/producers.css}" rel="stylesheet" />
+</head>
+<body>
+<div th:insert="~{ layout/page :: page}"></div>
+
+<div class="container" style="width:60%">
+    <div th:fragment="producer-form">
+        <form id="createProducerForm" th:action="@{/api/data/producers/create}" method="get">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" th:value="name" required>
+
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country" th:value="country" required>
+
+            <button type="button" onclick="createProducer()">Create</button>
+        </form>
+    </div>
+</div>
+<!--    <a th:href="@{/addnew}" class="btn btn-primary btn-sm mb-3" >Add Employee</a>-->
+<table style="width:54%" border="0"
+       class = "table table-striped table-responsive-md">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Country</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="producers:${producerlist}">
+        <td th:text="${producers.name}"></td>
+        <td th:text="${producers.country}"></td>
+        <!--            <td> <a th:href="@{/showFormForUpdate/{id}(id=${employee.id})}"-->
+        <!--                    class="btn btn-primary">Update</a>-->
+        <!--                <a th:href="@{/deleteEmployee/{id}(id=${employee.id})}"-->
+        <!--                   class="btn btn-danger">Delete</a>-->
+        <!--            </td>-->
+    </tr>
+    </tbody>
+</table>
+
+<!--<div>-->
+<!--    <button class="delete-btn">Delete</button>-->
+<!--    <button class="change-btn">Change</button>-->
+<!--</div>-->
+
+</body>
+</html>
+
+<script>
+
+    function createProducer() {
+        // Получаем данные из формы
+        var formData = new FormData(document.getElementById('createProducerForm'));
+
+        // Создаем запрос
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/api/data/producers/create', true);
+
+        // Отправляем данные
+        xhr.send(formData);
+
+        // После отправки запроса перезагружаем страницу
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                window.location.reload();
+            }
+        };
+    }
+</script>

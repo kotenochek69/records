@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="musician-form">
+    <div class="container" style="width:60%">
+        <form id="createMusicianForm" th:action="@{/data/musicians/create}" method="get">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" th:value="name" required>
+
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country" th:value="country" required>
+
+            <button type="button" onclick="createMusician()">Create</button>
+        </form>
+    </div>
+    <script>
+        function createMusician() {
+            // Получаем данные из формы
+            var formData = new FormData(document.getElementById('createMusicianForm'));
+
+            // Создаем запрос
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/data/musicians/create', true);
+
+            // Отправляем данные
+            xhr.send(formData);
+
+            // После отправки запроса перезагружаем страницу
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    window.location.reload();
+                }
+            };
+        }
+    </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecordsDb</title>
+    <link th:href="@{/styles/recordsCopy.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:insert="~{ layout/page :: page}"></div>
+
+<div th:insert="~{ records-copy/records-copy-form :: records-copy-form}"></div>
+
+<div th:insert="~{ records-copy/records-copy-table :: table}"></div>
+</body>
+</html>

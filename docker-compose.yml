@@ -1,0 +1,23 @@
+version: '3.6'
+
+services:
+  app:
+    entrypoint: java -jar records.jar
+    build:
+      dockerfile: Dockerfile
+      context: .
+    restart: always
+    container_name: app
+    ports:
+      - "8091:8080"
+
+  db:
+    image: 'postgres:latest'
+    restart: always
+    container_name: db
+    ports:
+      - "5436:5432"
+    environment:
+      - POSTGRES_DB=records-db #твои данные базы
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=records_password

@@ -1,0 +1,184 @@
+body {
+    background-color: #D5F5E3;
+    font-family: sans-serif;
+
+    padding: 0;
+    display: flex; /* Center content */
+    flex-direction: column;
+    /*align-items: center;*/
+
+}
+
+.navigation {
+    width: 200px; /* Width of navigation panel */
+    background-color: #A2D9CE; /* Light gray background */
+    padding: 20px;
+    position: fixed; /* Fix navigation to the left */
+    top: 0; /* Start at top of the page */
+    bottom: 0; /* Extend to bottom of the page */
+}
+
+.navigation-item {
+    display: block; /* Stack buttons vertically */
+    color: black;
+    text-decoration: none; /* Remove underline */
+    padding: 10px;
+    margin-bottom: 10px; /* Spacing between buttons */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.navigation-item:hover {
+    background-color: #D5F5E3; /* Light gray background on hover */
+}
+
+
+.container {
+    width: 50%; /* или другое значение ширины, которое вы предпочитаете */
+    margin-left: 300px;
+}
+
+h1 {
+    margin-top: 30px; /* Reduced margin-top */
+}
+
+.empty-space {
+    height: 50px; /* Измените этот размер на желаемый */
+}
+
+/* Дополнительные стили для кнопки "Delete" */
+.btn-danger {
+    background-color: #dc3545; /* Красный цвет */
+    color: #fff; /* Белый текст */
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+.btn-danger:hover {
+    background-color: #c82333; /* Цвет при наведении */
+}
+
+.button-group {
+    display: inline-block; /* Делаем блок кнопок инлайновым */
+    border: 2px solid #A2D9CE; /* Добавляем границу */
+    background-color: #A2D9CE; /* Цвет фона прямоугольника */
+    margin-top: 20px;
+    padding-top: 20px; /* Добавляем отступ сверху */
+    padding-bottom: 20px;
+    padding-left: 20px;
+    width: 780px;
+    border-radius: 10px;
+}
+
+.button {
+    background-color: #F5B041; /* Blue background */
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.button.data + .button.statistics {
+    margin-right: 500px
+}
+
+.button.statistics {
+    margin-right: 100px; /* Устанавливаем большее расстояние между кнопками Statistics и Exit */
+}
+/*.button.exit {*/
+/*    background-color: #F5B041; !* Blue background *!*/
+/*    color: white;*/
+/*}*/
+
+.button.exit:hover {
+    background-color: #F39C12; /* Darker blue on hover */
+}
+
+.button:hover {
+    background-color: #F39C12; /* Darker blue on hover */
+}
+
+
+
+
+table {
+    margin-top: 50px; /* Отступ сверху */
+    margin-left: 300px;
+    border-color: black;
+    border-radius: 10px;
+}
+
+th, td {
+    padding: 10px;
+    color: black;
+}
+
+thead {
+    background-color: #F39C12;
+}
+
+tr {
+    background-color: #FAD7A0;
+    color: #F39C12;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #F8C471 ;
+}
+
+.delete-btn,
+.change-btn {
+    padding: 8px 12px;
+    margin-left: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.delete-btn {
+    margin-left: 400px;
+    background-color: #dc3545; /* красный */
+}
+
+.change-btn {
+    background-color: #007bff; /* синий */
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #ff69b4;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #e64980;
+}
+
+.add-button {
+    background-color: #54666d;
+    border: none;
+    color: #51c54d;
+    padding: 15px 15px;
+    border-radius: 6px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 4px 2px;
+    cursor: pointer;
+
+}
+.form-container {
+    display: none;
+}

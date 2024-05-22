@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="table">
+    <table style="width:54%"
+           class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Record's name</th>
+            <th>Year</th>
+            <th>Produced by</th>
+            <th>Costs</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:id="${copy.id}" th:each="copy:${recordsCopylist}">
+            <td class="hoverable-cell" th:id="${copy.id}" th:with="recordCur =${copy?.record}">
+                <span th:value="${recordCur?.id}" th:text="${recordCur?.name}">${recordCur?.name}</span>
+                <select class="editable updater" name="recordId">
+                    <option th:value="${recordCur?.id}" th:text="${recordCur?.name}"></option>
+                    <option th:each="record : ${records}" th:value="${record.id}" th:text="${record.name}"></option>
+                </select>
+            </td>
+            <td th:id="${copy.id}" class="hoverable-cell-span">
+                <span class="editable info-number-span" th:name="year" th:text="${copy.year}"></span>
+            </td>
+            <td class="hoverable-cell" th:id="${copy.id}" th:with="producerCur=${copy?.producer}">
+                <span th:value="${producerCur?.id}" th:text="${producerCur?.name}">${producerCur?.name}</span>
+                <select class="editable updater" name="producerId" producerId="${copy?.producer?.getId()}">
+                    <option th:value="${producerCur?.id}" th:text="${producerCur?.name}"></option>
+                    <option th:each="producer : ${producers}" th:value="${producer.id}"
+                            th:text="${producer.name}"></option>
+                </select>
+            </td>
+            <td th:id="${copy.id}" class="hoverable-cell-span">
+                <span class="editable info-number-span" th:name="priceIn" th:text="${copy?.price_in}"></span>
+            </td>
+            <!--        <td><span th:if="${copy.price_in != null && copy.price_out != null}" th:text="'IN: ' + ${copy.price_in} + ', OUT: ' + ${copy.price_out} + ', DIF: ' + (${copy.price_out - copy.price_in} > 0 ? '+' : '') + (${copy.price_out - copy.price_in})"></span></td>-->
+
+
+            <td>
+                <button class="btn btn-danger delete-button" th:attr="data-record-id=${copy.id}">Delete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script th:inline="javascript">
+
+        function submitChangesSpan(element) {
+            const id = $(element).parent().attr('id');
+            const fieldName = $(element).attr('name');
+            const updatedValue = $(element).text();
+
+            fetch('/api/data/records-copy/' + id + '?' + fieldName + '=' + updatedValue, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(function (response) {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            }).then(function (data) {
+                console.log('Updated successfully:', data);
+                window.location.reload();
+            }).catch(function (error) {
+                console.error('Error updating data:', error);
+            });
+        };
+        function submitChanges() {
+            return function (){
+                const id = this.parentElement.parentElement.getAttribute('id');
+                const fieldName = this.getAttribute('name');
+                const updatedValue = this.value;
+
+                fetch('/api/data/records-copy/' + id + '?' + fieldName + '=' + updatedValue, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                }).then(function (data) {
+                    console.log('Updated successfully:', data);
+                    window.location.reload();
+                }).catch(function (error) {
+                    console.error('Error updating data:', error);
+                });
+            }
+        };
+
+        /*<![CDATA[*/
+        document.addEventListener('DOMContentLoaded', function () {
+            const editableFields = document.querySelectorAll('.editable');
+            console.log(editableFields);
+            editableFields.forEach(function (field) {
+                field.addEventListener('change', submitChanges());
+            });
+        });
+
+        $(document).ready(function () {
+            var editableSpans = $('.info-number-span');
+            console.log("SPANS:");
+            console.log(editableSpans);
+            editableSpans.each(function () {
+                $(this).dblclick(function () {
+                    $(this).attr('contentEditable', true);
+                    console.log("Editing span...");
+                });
+                $(this).blur(function () {
+                    $(this).attr('contentEditable', false);
+                    console.log("submitting");
+                    submitChangesSpan(this); // передаем текущий элемент в функцию submitChanges
+                    console.log("submitted");
+                });
+            });
+        });
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var hoverableCells = document.querySelectorAll(".hoverable-cell");
+            hoverableCells.forEach(function (cell) {
+                cell.addEventListener("mouseover", function () {
+                    this.querySelector("select").style.display = "block";
+                });
+                cell.addEventListener("mouseout", function () {
+                    this.querySelector("select").style.display = "none";
+                });
+            });
+        });
+        /*]]>*/
+        /*<![CDATA[*/
+        document.addEventListener('DOMContentLoaded', function () {
+            const deleteButtons = document.querySelectorAll('.delete-button');
+            deleteButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    const recordId = this.getAttribute('data-record-id');
+
+                    fetch('/api/data/records-copy/' + recordId, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(function (response) {
+                        window.location.reload();
+                    });
+
+                });
+            });
+        });
+
+    </script>
+
+</div>
+</body>
+</html>

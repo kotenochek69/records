@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="page">
+    <nav class="navigation">
+    <a th:href="@{/data/musicians}" class="navigation-item">Musicians</a>
+    <a th:href="@{/data/genres}" class="navigation-item">Genres</a>
+    <a th:href="@{/data/songs}" class="navigation-item">Songs</a>
+    <a th:href="@{/data/records}" class="navigation-item">Records</a>
+    <a th:href="@{/data/producers}" class="navigation-item">Producers</a>
+    <a th:href="@{/data/customers}" class="navigation-item">Customers</a>
+    <a th:href="@{/data/records-copy}" class="navigation-item">Records Copy</a>
+    </nav>
+    <header><div class="container">
+        <h1>BLUES22 data base</h1>
+        <div class="button-group">
+            <a th:href="@{/data/home}" class="button data">Data</a>
+<!--            <a href="../statistics.html" class="button statistics">Statistics</a>-->
+<!--            <a href="auto.html" class="button exit">Exit</a>-->
+        </div>
+    </div> </header>
+
+    <div class="empty-space"></div>
+
+</div>
+</body>
+</html>

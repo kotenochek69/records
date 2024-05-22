@@ -1,0 +1,1 @@
+CREATE INDEX song_id_name ON public.songs (id, name);

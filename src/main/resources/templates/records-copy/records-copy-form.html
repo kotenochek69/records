@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="records-copy-form">
+
+    <div class="container" style="width:60%">
+        <form id="createRecordsCopyForm" th:action="@{/data/records-copy/create}" method="get">
+
+            <label for="recordEntity">Record:</label>
+            <select id="recordEntity" name="recordId" required>
+                <option th:each="record : ${records}" th:value="${record.id}" th:text="${record.name}"></option>
+            </select>
+
+            <label for="year">Year:</label>
+            <input type="number" min="1800" max="2026" id="year" value="2024" name="year" th:value="year" required>
+
+            <label for="producer">Producer:</label>
+            <select id="producer" name="producerId" required>
+                <option th:each="producer : ${producers}" th:value="${producer.id}" th:text="${producer.name}"></option>
+            </select>
+
+            <label for="priceIn">Costs:</label>
+            <input type="number" id="priceIn" min="0" value="100" name="priceIn" th:value="priceIn" required>
+
+            <button type="button" onclick="createRecordsCopy()">Create</button>
+        </form>
+    </div>
+    <script>
+        function createRecordsCopy() {
+            // Получаем данные из формы
+            var formData = new FormData(document.getElementById('createRecordsCopyForm'));
+
+            // Создаем запрос
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/api/data/records-copy/create', true);
+
+            // Отправляем данные
+            xhr.send(formData);
+
+            // После отправки запроса перезагружаем страницу
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    window.location.reload();
+                }
+            };
+        }
+
+    </script>
+
+</div>
+</body>
+</html>

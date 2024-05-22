@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecordsDb</title>
+    <link th:href="@{/styles/musicians.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:insert="~{ layout/page :: page}"></div>
+
+<div th:insert="~{ musicians/musician-form :: musician-form}"></div>
+
+<div th:insert="~{ musicians/musician-table :: musician-table}"></div>
+</body>
+</html>
+
+<script>
+</script>
