@@ -1,0 +1,49 @@
+name: CI/CD for Records-project
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  tests:
+    runs-on: marus
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+
+      - name: Run tests
+        run: |
+          chmod +x ./gradlew
+          ./gradlew test
+
+  build-and-deploy:
+    runs-on: marus
+    needs: tests
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+
+      - name: Start docker-compose with app rebuild
+        run: |
+          docker-compose up -d --no-build db
+          docker-compose down app
+          docker-compose up -d --build app
+      
+
+
