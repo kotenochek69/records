@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
       context: .
     restart: always
-    container_name: app
+    container_name: record-app
     ports:
       - "8091:8080"
 
