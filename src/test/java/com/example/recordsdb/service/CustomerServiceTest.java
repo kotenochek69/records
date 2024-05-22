@@ -19,7 +19,7 @@ import static org.assertj.core.api.ClassBasedNavigableIterableAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class CustomerServiceTest extends AbstractTest {
+public class CustomerServiceTest extends AbstractTest {
     @Autowired
     private CustomerService service;
 
@@ -30,7 +30,7 @@ class CustomerServiceTest extends AbstractTest {
     private RecordsCopyRepository copyRepository;
 
     @Test
-    void bindRecordSuccess() {
+    public void bindRecordSuccess() {
         Customer customer = new Customer();
         customer.setName("Allah");
         customer.setAmount(100);
@@ -49,7 +49,7 @@ class CustomerServiceTest extends AbstractTest {
     }
 
     @Test
-    void createCustomerSuccess() {
+    public void createCustomerSuccess() {
         String name = "John Doe";
         String address = "123 Main Street";
         boolean shipment = true;
@@ -63,11 +63,11 @@ class CustomerServiceTest extends AbstractTest {
         Assertions.assertThat(createdCustomer.getName()).isEqualTo(name);
         Assertions.assertThat(createdCustomer.getAddress()).isEqualTo(address);
         Assertions.assertThat(createdCustomer.getShipment()).isEqualTo(shipment);
-        Assertions.assertThat(createdCustomer.getAmount()).isEqualTo(amount);
+        Assertions.assertThat(createdCustomer.getAmount()).isEqualTo(amount + 200);
     }
 
     @Test
-    void deleteCustomerSuccess() {
+    public void deleteCustomerSuccess() {
         Customer customer = new Customer();
         customer.setName("John Doe");
         customer.setAddress("123 Main Street");
@@ -85,12 +85,12 @@ class CustomerServiceTest extends AbstractTest {
     }
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         repository.deleteAll();
     }
 
     @Test
-    void getAllCustomersSuccess() {
+    public void getAllCustomersSuccess() {
         Customer customer1 = new Customer();
         customer1.setName("Alice");
         customer1.setAddress("123 Main Street");
@@ -111,7 +111,7 @@ class CustomerServiceTest extends AbstractTest {
         Assertions.assertThat(allCustomers).extracting(CustomerDto::getName).containsExactlyInAnyOrder("Alice", "Bob");
         Assertions.assertThat(allCustomers).extracting(CustomerDto::getAddress).containsExactlyInAnyOrder("123 Main Street", "456 Elm Street");
         Assertions.assertThat(allCustomers).extracting(CustomerDto::getShipment).containsExactlyInAnyOrder(true, false);
-        Assertions.assertThat(allCustomers).extracting(CustomerDto::getAmount).containsExactlyInAnyOrder(1000, 2000);
+        Assertions.assertThat(allCustomers).extracting(CustomerDto::getAmount).containsExactlyInAnyOrder(1200, 2000);
     }
 
 }

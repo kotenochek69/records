@@ -24,7 +24,7 @@ public class Musician {
     private String name;
     @Column(name = "country")
     private String country;
-    @OneToMany(mappedBy = "musician", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "musician", orphanRemoval = true)
     private Set<Song> songs = new HashSet<>();
 
     @ManyToMany

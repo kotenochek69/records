@@ -28,7 +28,7 @@ class MusicianServiceTest extends AbstractTest {
     private RecordRepository recordRepository;
 
     @Test
-    void createMusicianSuccess() {
+    public void createMusicianSuccess() {
         String name = "John Doe";
         String country = "USA";
 
@@ -42,7 +42,7 @@ class MusicianServiceTest extends AbstractTest {
     }
 
     @Test
-    void deleteMusicianSuccess() {
+    public void deleteMusicianSuccess() {
         Musician musician = new Musician();
         musician.setName("John Doe");
         musician.setCountry("USA");
@@ -58,12 +58,12 @@ class MusicianServiceTest extends AbstractTest {
     }
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         repository.deleteAll();
     }
 
     @Test
-    void getAllMusiciansSuccess() {
+    public void getAllMusiciansSuccess() {
         Musician musician1 = new Musician();
         musician1.setName("Alice");
         musician1.setCountry("USA");
