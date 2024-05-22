@@ -25,6 +25,7 @@ public class MusicianService {
     private final RecordRepository recordRepo;
     private final MusicianMapper mapper;
 
+    @Transactional
     public List<MusicianDto> getAllMusicians() {
         return musicianRepo.findAll().stream().map(mapper::map).toList();
     }
