@@ -1,88 +1,25 @@
-INSERT INTO records
-(name)
-VALUES
-    ('Imagine'),
-    ('Curtain Call'),
-    ('The very Best of the Platters'),
-    ('The Ultimate collection'),
-    ('All things must pass');
-
-INSERT INTO genres
-(name)
-VALUES
-    ('pop'),
-    ('rock'),
-    ('rap'),
-    ('hip-hop');
-
-INSERT INTO songs
-(name, year)
-VALUES
-    ('Imagine', 1971),
-    ('Crippled Inside', 1971),
-    ('Jelous Guy', 1971),
-    ('Intro', 2005),
-    ('Only you', 2020),
-    ('Paranoid', 2016),
-    ('My sweet lord', 1970);
-
-INSERT INTO producers
-(name, country)
-VALUES
-    ('Apple', 'England'),
-    ('Shady', 'England'),
-    ('Not Now Music', 'Europe'),
-    ('BMG', 'Europe'),
-    ('Capitol', 'Europe');
-
-INSERT INTO customers
-(name, address, shipment, amount)
-VALUES
-    ('Валентин Стрыко', 'Пирогова 2', true, 1000),
-    ('Маша Малфой', 'Пирогова 23', true, 10005),
-    ('Алла Хабкар', 'Ильича 6', true, 2000),
-    ('Денис Пип', 'Ильича 2', true, 6000),
-    ('Алексей Жидков', 'Пирогова 1', true, 1000000);
 
 
 
-INSERT INTO records_copy
-(price_in, price_out, rarity, sold, supplier, year)
-VALUES
-    (1000, 1501, 3, true, 'RecordsShop', 2015),
-    (2000, 2500, 2, true, 'RecordsShop', 2021),
-    (1000, 1500, 1, true, 'RecordsShop', 2020),
-    (3000, 3500, 2, true, 'RecordsShop', 2023),
-    (4000, 4500, 3, true, 'RecordsShop', 2021);
-
-INSERT INTO musicians
-(name, country)
-VALUES
-    ('John Lennon', 'England'),
-    ('Eminem', 'USA'),
-    ('Platters', 'USA'),
-    ('Black Sabbath', 'England'),
-    ('George Harrison', 'England');
-
-SELECT rarity, sold FROM records_copy;
-
-SELECT * FROM records_copy
-WHERE (rarity > 1);
-
-SELECT rarity, name FROM records_copy, musicians;
-
-SELECT * FROM musicians
-JOIN producers ON musicians.country=producers.country;
-
-SELECT * FROM musicians
-LEFT JOIN producers ON musicians.country=producers.country;
-
-SELECT price_in FROM records_copy
-GROUP BY price_in;
-
-SELECT rarity, AVG(price_in) as price FROM records_copy
-GROUP BY rarity
-HAVING AVG(price_in) > 2000;
+-- SELECT rarity, sold FROM records_copy;
+--
+-- SELECT * FROM records_copy
+-- WHERE (rarity > 1);
+--
+-- SELECT rarity, name FROM records_copy, musicians;
+--
+-- SELECT * FROM musicians
+-- JOIN producers ON musicians.country=producers.country;
+--
+-- SELECT * FROM musicians
+-- LEFT JOIN producers ON musicians.country=producers.country;
+--
+-- SELECT price_in FROM records_copy
+-- GROUP BY price_in;
+--
+-- SELECT rarity, AVG(price_in) as price FROM records_copy
+-- GROUP BY rarity
+-- HAVING AVG(price_in) > 2000;
 
 SELECT * FROM musicians
 ORDER BY name;

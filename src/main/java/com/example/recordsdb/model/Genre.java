@@ -6,7 +6,9 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -27,8 +29,10 @@ public class Genre {
     private List<Song> songs = new ArrayList<>();
 
     @ManyToMany
-    @JoinTable(name="records_genres", joinColumns = @JoinColumn(name = "records_id"), inverseJoinColumns = @JoinColumn(name = "genres_id"))
-    private List<RecordEntity> records = new ArrayList<>();
+    @JoinTable(name="records_genres",
+            joinColumns = @JoinColumn(name = "genres_id"),
+            inverseJoinColumns = @JoinColumn(name = "records_id"))
+    private Set<RecordEntity> records = new HashSet<>();
 
     @ManyToMany
     @JoinTable(

@@ -16,14 +16,12 @@
     <thead>
     <tr>
         <th>Name</th>
-        <th>Songs</th>
         <th>Records</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="genres:${genrelist}">
         <td th:text="${genres.name}"></td>
-        <td th:text="${genres.getSongs()}"></td>
         <td th:text="${genres.getRecords()}"></td>
         <!--            <td> <a th:href="@{/showFormForUpdate/{id}(id=${employee.id})}"-->
         <!--                    class="btn btn-primary">Update</a>-->

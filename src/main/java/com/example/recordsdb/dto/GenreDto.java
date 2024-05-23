@@ -5,7 +5,9 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Schema(description = "Модель данных жанра")
@@ -22,5 +24,5 @@ public class GenreDto {
     private List<String> songs = new ArrayList<>();
 
     @Schema(description = "Пластинки жанра")
-    private List<String> records = new ArrayList<>();
+    private Set<String> records = new HashSet<>();
 }

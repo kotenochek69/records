@@ -6,6 +6,8 @@ import com.example.recordsdb.model.RecordEntity;
 import com.example.recordsdb.model.Song;
 import org.springframework.stereotype.Component;
 
+import java.util.stream.Collectors;
+
 @Component
 public class GenreMapper {
 
@@ -15,7 +17,7 @@ public class GenreMapper {
         dto.setId(genre.getId());
         dto.setName(genre.getName());
         dto.setSongs(genre.getSongs().stream().map(Song::getName).toList());
-        dto.setRecords(genre.getRecords().stream().map(RecordEntity::getName).toList());
+        dto.setRecords(genre.getRecords().stream().map(RecordEntity::getName).collect(Collectors.toSet()));
         return dto;
     }
 
@@ -32,7 +34,7 @@ public class GenreMapper {
             var entity = new RecordEntity();
             entity.setName(name);
             return entity;
-        }).toList());
+        }).collect(Collectors.toSet()));
 
         return genre;
     }

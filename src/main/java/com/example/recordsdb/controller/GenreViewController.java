@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("data/genres")
 @Schema(description = "Операции с жанрами")
-public class GenreController {
+public class GenreViewController {
     private final GenreService genreService;
 
     @GetMapping

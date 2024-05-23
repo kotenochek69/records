@@ -10,8 +10,5 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc
 public class AbstractTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-
     public SoftAssertions soft = new SoftAssertions();
 }

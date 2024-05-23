@@ -43,7 +43,7 @@ create table if not exists producers
     id      bigserial
         primary key,
     country varchar(255),
-    name    varchar(255)
+    name    varchar(255) not null
 );
 
 
